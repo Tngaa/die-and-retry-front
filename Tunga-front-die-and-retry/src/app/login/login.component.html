@@ -1,0 +1,9 @@
+<div id="login" class="fl-column">
+  <h1>Die And Retry</h1>
+
+  <input type="text" maxlength="50" placeholder="User name" class="mn-bottom" pInputText [(ngModel)]="user.username" />
+
+  <input type="password" maxlength="50" placeholder="Password" class="mn-bottom" pInputText [(ngModel)]="user.password" (keydown.enter)="login()" />
+
+  <p-button label="Log in" styleClass="ui-button-primary" (click)="login()"></p-button>
+</div>

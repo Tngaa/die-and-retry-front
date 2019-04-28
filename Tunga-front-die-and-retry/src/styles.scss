@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+
+.mn-around {
+    margin: 1em !important;
+}
+
+.mn-right {
+    margin-right: 1em !important;
+}
+
+.mn-left {
+    margin-left: 1em !important;
+}
+
+.mn-top {
+    margin-top: 1em !important;
+}
+
+.mn-bottom {
+    margin-bottom: 1em !important;
+}
+
+.pg-around {
+    padding: 1em !important;
+}
+
+.pg-right {
+    padding-right:  !important;
+}
+
+.pg-left {
+    padding-left: 1em !important;
+}
+
+.pg-top {
+    padding-top: 1em !important;
+}
+
+.pg-bottom {
+    padding-bottom: 1em !important;
+}
+
+.fl-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.fl-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.jc-sbw {
+    justify-content: space-between
+}

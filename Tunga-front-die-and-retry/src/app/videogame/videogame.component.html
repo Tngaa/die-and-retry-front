@@ -1,0 +1,113 @@
+<!-- Popup de confirmation -->
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+
+<p-fieldset legend="Video games management" class="mn-bottom">
+
+  <div class="fl-row jc-sbw">
+
+    <!-- Filters -->
+    <div>
+      <p-dropdown [options]="platforms" class="mn-right" placeholder="Platform" optionLabel="name" showClear="true"
+        [(ngModel)]="selectedPlatform" (ngModelChange)="onChangeFilter()"></p-dropdown>
+
+      <p-dropdown [options]="publishers" class="mn-right" placeholder="Publisher" optionLabel="name" showClear="true"
+        [(ngModel)]="selectedPublisher" (ngModelChange)="onChangeFilter()"></p-dropdown>
+
+      <p-dropdown [options]="developers" placeholder="Developer" optionLabel="name" showClear="true"
+        [(ngModel)]="selectedDeveloper" (ngModelChange)="onChangeFilter()"></p-dropdown>
+    </div>
+
+    <!-- Bouton de déconnexion -->
+    <p-button label="Log out" styleClass="ui-button-primary" (click)="logout()"></p-button>
+  </div>
+</p-fieldset>
+
+<!-- Bouton de création -->
+<p-button label="Create" styleClass="ui-button-primary" (click)="createVideogame()" [disabled]="isAddingVideogame()">
+</p-button>
+
+<!-- Video game list -->
+<p-table [value]="videogames" class="mn-top">
+
+  <!-- Headers -->
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Title</th>
+      <th>Release date</th>
+      <th>Platform</th>
+      <th>Publisher</th>
+      <th>Developer</th>
+      <th>Action</th>
+    </tr>
+  </ng-template>
+
+  <!-- Content -->
+  <ng-template pTemplate="body" let-videogame>
+    <tr>
+      <td>
+        <span *ngIf="!videogame._isModifying; else title">{{videogame.title}}</span>
+
+        <ng-template #title>
+          <input type="text" maxlength="50" pInputText [(ngModel)]="videogame.title" />
+        </ng-template>
+      </td>
+
+      <td>
+        <span *ngIf="!videogame._isModifying; else releaseDate">{{videogame.releaseDate}}</span>
+
+        <ng-template #releaseDate>
+          <input type="text" maxlength="50" pInputText [(ngModel)]="videogame.releaseDate" />
+        </ng-template>
+      </td>
+
+      <td>
+        <span *ngIf="!videogame._isModifying; else platform">{{videogame.platform.name}}</span>
+
+        <ng-template #platform>
+          <p-dropdown [options]="platforms" class="mn-right" placeholder="Platform" optionLabel="name"
+            [(ngModel)]="videogame.platform"></p-dropdown>
+        </ng-template>
+      </td>
+
+      <td>
+        <span *ngIf="!videogame._isModifying; else publisher">{{videogame.publisher.name}}</span>
+
+        <ng-template #publisher>
+          <p-dropdown [options]="publishers" class="mn-right" placeholder="Publisher" optionLabel="name"
+            [(ngModel)]="videogame.publisher"></p-dropdown>
+        </ng-template>
+      </td>
+
+      <td>
+        <span *ngIf="!videogame._isModifying; else developer">{{videogame.developer.name}}</span>
+
+        <ng-template #developer>
+          <p-dropdown [options]="developers" placeholder="Developer" optionLabel="name"
+            [(ngModel)]="videogame.developer"></p-dropdown>
+        </ng-template>
+      </td>
+
+      <td>
+
+        <!-- Bouton de suppression -->
+        <p-button *ngIf="(videogame.id && !videogame._isModifying) || (!videogame.id && !videogame._isModifying)"
+          label="Delete" class="mn-right" styleClass="ui-button-danger" (click)="deleteVideogame(videogame)">
+        </p-button>
+
+        <!-- Bouton d'annulation -->
+        <p-button *ngIf="videogame._isModifying" label="Cancel" class="mn-right" styleClass="ui-button-danger"
+          (click)="cancelVideogame()">
+        </p-button>
+
+        <!-- Bouton de modification -->
+        <p-button *ngIf="!videogame._isModifying" label="Modify" styleClass="ui-button-warning"
+          (click)="videogame._isModifying = true"></p-button>
+
+        <!-- Bouton de mise à jour -->
+        <p-button *ngIf="videogame._isModifying" label="Save" styleClass="ui-button-success"
+          (click)="saveVideogame(videogame)"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
